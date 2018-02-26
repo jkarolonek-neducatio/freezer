@@ -5,15 +5,16 @@ class Freezer {
   get size() {
     return this._size;
   }
-  createFreezer(container) {
+  createFreezer() {
     let freezer = document.createElement("DIV");
     freezer.style.width = this._size;
     freezer.style.height = this._size;
     freezer.style.border = "1px solid red";
+    freezer.style.position = "relative";
     freezer.setAttribute("id", "freezer");
-    container.appendChild(freezer);
+    this.freezerElement = freezer;
   }
-  freezerDestroyer(element) {
+  freezerDestroyer() {
 
   }
 }
