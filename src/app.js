@@ -1,3 +1,4 @@
+import './app.stylus';
 import Freezer from "./freezer";
 import Molecule from "./molecule";
 
@@ -36,15 +37,65 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     let molecules = [];
 
-    for (let i = 0; i < moleculeCountNumber; i++) {
-      let position = getRandomPos(maxPosition, minPosition);
-      molecules[i] = new Molecule(position[0], position[1]);
+    function moleculeCreator() {
+      for (let i = 0; i < moleculeCountNumber; i++) {
+        let position = getRandomPos(maxPosition, minPosition);
+        let molecule = document.createElement("DIV");
+        molecules[i] = new Molecule(position[0], position[1], molecule);
+        freezerInstance.freezerElement.appendChild(molecules[i].view);
+      }
+    }
+    console.log(molecules);
+
+    moleculeCreator()
+
+    function randomMoleculeMover() {
+      for (let j = 0; j < molecules.length; j++) {
+        let randomiser = Math.floor(Math.random() * 8);
+        let moveX;
+        let moveY;
+
+        switch(randomiser) {
+          case 0:
+              moveX = -1;
+              moveY = 1;
+              break;
+          case 1:
+              moveX = 0;
+              moveY = 1;
+              break;
+          case 2:
+              moveX = 1;
+              moveY = 1;
+              break;
+          case 3:
+              moveX = -1;
+              moveY = 0;
+              break;
+          case 4:
+              moveX = 1;
+              moveY = 0;
+              break;
+          case 5:
+              moveX = -1;
+              moveY = -1;
+              break;
+          case 6:
+              moveX = 0;
+              moveY = -1;
+              break;
+          case 7:
+              moveX = 1;
+              moveY = -1;
+        }
+        molecules[j].moleculePositionUpdate(moveX, moveY);
+      }
+      
     }
 
-    for (let j = 0; j < molecules.length; j++) {
-      molecules[j].createMolecule(j);
-      freezerInstance.freezerElement.appendChild(molecules[j].molecule);
-    }
+    setInterval(function() {
+      randomMoleculeMover();
+    }, 10);
 
   });
 

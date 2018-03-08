@@ -1,10 +1,7 @@
-
-body
-  background-color black
-  color white
-
-a
-  color white
-
-h1
-  color green
+.molecule 
+  width 1px
+  height 1px
+  background-color blue
+  position absolute
+  top 0
+  left 0

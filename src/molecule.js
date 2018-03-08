@@ -1,7 +1,10 @@
 class Molecule {
-    constructor(x, y) {
+    constructor(x, y, view) {
         this._x = x;
         this._y = y;
+        this._view = view;
+        this._view.classList.add("molecule");
+        this._view.style.transform = `translate(${this.x}px, ${this.y}px)`;
     }
     get x() {
         return this._x;
@@ -9,17 +12,14 @@ class Molecule {
     get y() {
         return this._y;
     }
-    createMolecule(id) {
-        let molecule = document.createElement("DIV");
-        molecule.style.width = "1px";
-        molecule.style.height = "1px";
-        molecule.style.backgroundColor = "blue";
-        molecule.style.position = "absolute";
-        molecule.style.top = "0";
-        molecule.style.left = "0";
-        molecule.setAttribute("id", id);
-        molecule.style.transform = `translate(${this.x}px, ${this.y}px)`;
-        this.molecule = molecule;
+    get view() {
+        return this._view;
+    }
+
+    moleculePositionUpdate(moveX, moveY) {
+        this._x = this._x + moveX;
+        this._y = this._y + moveY;
+        this._view.style.transform = `translate(${this._x}px, ${this._y}px)`;
     }
 }
 
