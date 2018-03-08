@@ -1,7 +1,10 @@
-.molecule 
+.molecule-mobile 
   width 1px
   height 1px
   background-color blue
   position absolute
   top 0
   left 0
+
+.molecule-frozen
+  background-color #00FFFF 

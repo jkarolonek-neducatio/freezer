@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       for (let i = 0; i < moleculeCountNumber; i++) {
         let position = getRandomPos(maxPosition, minPosition);
         let molecule = document.createElement("DIV");
-        molecules[i] = new Molecule(position[0], position[1], molecule);
+        molecules[i] = new Molecule(position[0], position[1], molecule, "mobile");
         freezerInstance.freezerElement.appendChild(molecules[i].view);
       }
     }
@@ -88,7 +88,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
               moveX = 1;
               moveY = -1;
         }
-        molecules[j].moleculePositionUpdate(moveX, moveY);
+        if (molecules[j].x != maxPosition && molecules[j].x != minPosition && molecules[j].y != maxPosition && molecules[j].y != minPosition && molecules[j].x != -maxPosition && molecules[j].x != -minPosition && molecules[j].y != -maxPosition && molecules[j].y != -minPosition) {
+          molecules[j].moleculePositionUpdate(moveX, moveY);
+        } else {
+          molecules[j]._state = "frozen";
+        }
       }
       
     }
