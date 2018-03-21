@@ -88,10 +88,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
               moveX = 1;
               moveY = -1;
         }
-        if (molecules[j].x != maxPosition && molecules[j].x != minPosition && molecules[j].y != maxPosition && molecules[j].y != minPosition && molecules[j].x != -maxPosition && molecules[j].x != -minPosition && molecules[j].y != -maxPosition && molecules[j].y != -minPosition) {
+        if (molecules[j].x != maxPosition && molecules[j].x != minPosition && molecules[j].y != maxPosition && molecules[j].y != minPosition && molecules[j].x != -maxPosition && molecules[j].x != -minPosition && molecules[j].y != -maxPosition && molecules[j].y != -minPosition && molecules[j]._state != "frozen") {
           molecules[j].moleculePositionUpdate(moveX, moveY);
         } else {
           molecules[j]._state = "frozen";
+        }
+      }
+      for (let i = 0; i < molecules.length; i++) {
+        let checkedMolecule = molecules[i];
+        for (let j = 0; j < molecules.length; j++) {
+          let checker = molecules[j];
+          if (checkedMolecule === checker) {
+            break;
+          } else if (checkedMolecule.x - 1 === checker.x && checker._state === "frozen" && checkedMolecule.y + 1 === checker.y && checker._state === "frozen" || checkedMolecule.x === checker.x && checker._state === "frozen" && checkedMolecule.y + 1 === checker.y && checker._state === "frozen" || checkedMolecule.x + 1 === checker.x && checker._state === "frozen" && checkedMolecule.y + 1 === checker.y && checker._state === "frozen" || checkedMolecule.x - 1 === checker.x && checker._state === "frozen" && checkedMolecule.y === checker.y && checker._state === "frozen" || checkedMolecule.x + 1 === checker.x && checker._state === "frozen" && checkedMolecule.y === checker.y && checker._state === "frozen" || checkedMolecule.x - 1 === checker.x && checker._state === "frozen" && checkedMolecule.y - 1 === checker.y && checker._state === "frozen" || checkedMolecule.x === checker.x && checker._state === "frozen" && checkedMolecule.y - 1 === checker.y && checker._state === "frozen" || checkedMolecule.x + 1 === checker.x && checker._state === "frozen" && checkedMolecule.y - 1 === checker.y && checker._state === "frozen") {
+            checkedMolecule._state = "frozen";
+          }
         }
       }
       
